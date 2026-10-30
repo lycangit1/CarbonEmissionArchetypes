@@ -1,0 +1,8 @@
+brag-output/
+prd.md
+prd2.md
+prd*.md
+.venv/
+__pycache__/
+create_compositions.py
+patch_ignore.py

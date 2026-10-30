@@ -1,0 +1,208 @@
+Created At: 2026-09-27T18:06:52+05:30
+Completed At: 2026-09-27T18:06:52+05:30
+File Path: `file:///c:/Users/shiva/OneDrive/Desktop/2CSE11/SEMESTER%205/major%20project/model/cO2%20pipeline/style.css`
+Total Lines: 3656
+Total Bytes: 74265
+Showing lines 301 to 500
+The following code has been modified to include a line number before every line, in the format: <line_number>: <original_line>. Please note that any changes targeting the original code should remove the line number, colon, and leading space.
+301:   flex-direction: column;
+302:   gap: 16px;
+303:   margin-bottom: 28px;
+304: }
+305: 
+306: .country-selector-row {
+307:   display: flex;
+308:   align-items: center;
+309:   justify-content: space-between;
+310:   gap: 16px;
+311:   flex-wrap: wrap;
+312: }
+313: 
+314: .searchable-select-wrap {
+315:   position: relative;
+316:   width: 320px;
+317: }
+318: 
+319: .search-input {
+320:   width: 100%;
+321:   background: var(--bg-card-subtle);
+322:   border: 1px solid var(--border-color);
+323:   border-radius: var(--radius-sm);
+324:   color: #fff;
+325:   padding: 10px 14px;
+326:   font-size: 13.5px;
+327:   font-weight: 500;
+328:   outline: none;
+329:   transition: var(--transition);
+330:   cursor: pointer;
+331: }
+332: 
+333: .search-input:focus {
+334:   border-color: var(--accent-orange);
+335:   background: #1f1f28;
+336: }
+337: 
+338: .search-results-dropdown {
+339:   position: absolute;
+340:   top: calc(100% + 4px);
+341:   left: 0;
+342:   right: 0;
+343:   background: var(--bg-sidebar);
+344:   border: 1px solid var(--border-color);
+345:   border-radius: var(--radius-sm);
+346:   max-height: 240px;
+347:   overflow-y: auto;
+348:   z-index: 50;
+349:   display: none;
+350:   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+351: }
+352: 
+353: .search-results-dropdown.open {
+354:   display: block;
+355: }
+356: 
+357: .search-item {
+358:   padding: 9px 14px;
+359:   font-size: 13px;
+360:   color: var(--text-muted);
+361:   cursor: pointer;
+362:   display: flex;
+363:   justify-content: space-between;
+364:   align-items: center;
+365:   transition: background 0.15s ease;
+366: }
+367: 
+368: .search-item:hover, .search-item.highlighted {
+369:   background: rgba(249, 115, 22, 0.15);
+370:   color: #fff;
+371: }
+372: 
+373: .search-item .item-code {
+374:   font-family: monospace;
+375:   font-size: 11px;
+376:   color: var(--text-dim);
+377: }
+378: 
+379: .preset-pills-row {
+380:   display: flex;
+381:   align-items: center;
+382:   gap: 8px;
+383:   flex-wrap: wrap;
+384: }
+385: 
+386: .preset-pill-label {
+387:   font-size: 12px;
+388:   font-weight: 600;
+389:   color: var(--text-dim);
+390:   text-transform: uppercase;
+391:   letter-spacing: 0.04em;
+392:   margin-right: 4px;
+393: }
+394: 
+395: .preset-pill {
+396:   padding: 5px 11px;
+397:   background: var(--bg-card-subtle);
+398:   border: 1px solid var(--border-color);
+399:   border-radius: var(--radius-sm);
+400:   color: var(--text-muted);
+401:   font-size: 12px;
+402:   font-weight: 500;
+403:   cursor: pointer;
+404:   transition: var(--transition);
+405: }
+406: 
+407: .preset-pill:hover {
+408:   background: var(--bg-card-hover);
+409:   color: #fff;
+410:   border-color: #3f3f50;
+411: }
+412: 
+413: .preset-pill.active {
+414:   background: rgba(249, 115, 22, 0.2);
+415:   color: var(--accent-orange);
+416:   border-color: rgba(249, 115, 22, 0.4);
+417:   font-weight: 600;
+418: }
+419: 
+420: /* --------------------------------------------------------------------------
+421:    Section 1: Track A & Track B Layout
+422:    -------------------------------------------------------------------------- */
+423: .track-header {
+424:   display: flex;
+425:   align-items: center;
+426:   justify-content: space-between;
+427:   padding-bottom: 14px;
+428:   border-bottom: 1px solid var(--border-subtle);
+429:   margin-bottom: 18px;
+430: }
+431: 
+432: .track-badge {
+433:   padding: 4px 10px;
+434:   border-radius: 9999px;
+435:   font-size: 11px;
+436:   font-weight: 600;
+437:   text-transform: uppercase;
+438:   letter-spacing: 0.05em;
+439: }
+440: 
+441: .track-badge.static {
+442:   background: rgba(6, 182, 212, 0.12);
+443:   color: var(--accent-cyan);
+444:   border: 1px solid rgba(6, 182, 212, 0.25);
+445: }
+446: 
+447: .track-badge.dynamic {
+448:   background: rgba(249, 115, 22, 0.12);
+449:   color: var(--accent-orange);
+450:   border: 1px solid rgba(249, 115, 22, 0.25);
+451: }
+452: 
+453: /* Country Highlight Card */
+454: .country-profile-card {
+455:   display: flex;
+456:   align-items: center;
+457:   justify-content: space-between;
+458:   background: var(--bg-card-subtle);
+459:   border: 1px solid var(--border-color);
+460:   border-radius: var(--radius-md);
+461:   padding: 16px 20px;
+462:   margin-bottom: 20px;
+463: }
+464: 
+465: .country-profile-name {
+466:   font-size: 20px;
+467:   font-weight: 700;
+468:   color: #fff;
+469:   display: flex;
+470:   align-items: center;
+471:   gap: 8px;
+472: }
+473: 
+474: .country-profile-code {
+475:   font-family: monospace;
+476:   font-size: 12px;
+477:   color: var(--text-dim);
+478:   padding: 2px 6px;
+479:   background: var(--bg-card);
+480:   border-radius: 4px;
+481:   border: 1px solid var(--border-subtle);
+482: }
+483: 
+484: .country-profile-emissions {
+485:   font-size: 12.5px;
+486:   color: var(--text-muted);
+487:   margin-top: 2px;
+488: }
+489: 
+490: .country-profile-emissions span {
+491:   color: #fff;
+492:   font-weight: 600;
+493: }
+494: 
+495: /* Archetype Badge */
+496: .archetype-badge {
+497:   display: inline-flex;
+498:   align-items: center;
+499:   gap: 6px;
+500:   padding: 6px 14px;
+The above content does NOT show the entire file contents. If you need to view any lines of the file which were not shown to complete your task, call this tool again to view those lines.

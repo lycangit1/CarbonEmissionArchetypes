@@ -1,0 +1,132 @@
+{
+  "Energy-Heavy": {
+    "profile_name": "Power Generation & Grid Focus",
+    "simple_summary": "Most carbon emissions come from burning coal, oil, and gas to generate electricity.",
+    "primary_challenge": "Most emissions come from burning fossil fuels (coal, oil, gas) for electricity and heating. The main challenge is transitioning the national power grid to renewable sources like solar and wind while building large-scale battery storage for stability.",
+    "bottleneck": "Most emissions come from burning fossil fuels (coal, oil, gas) for electricity and heating. The main challenge is transitioning the national power grid to renewable sources like solar and wind while building large-scale battery storage for stability.",
+    "xai_rule": "This country is classified as Energy-Heavy because generating electricity and heat is its largest single source of carbon emissions, significantly exceeding the global average. Transitioning this specific sector is the most mathematically effective way to reduce the nation's overall footprint.",
+    "mathematical_bounding_rule": "IF Energy > 35.0% AND (Energy > Industry) AND (Energy > Agriculture) -> Energy-Heavy Economy",
+    "pathways": [
+      {
+        "title": "Retire Coal & Expand Battery Storage",
+        "description": "Gradually decommission legacy coal-fired power stations while rolling out grid-scale battery storage facilities. This ensures uninterrupted electricity supply and grid stability as intermittent solar and wind capacity expands."
+      },
+      {
+        "title": "Build High-Voltage Power Lines",
+        "description": "Construct long-distance high-voltage transmission lines connecting distant renewable wind and solar corridors directly to high-demand industrial centers and metropolitan cities."
+      },
+      {
+        "title": "Smart Grid & Demand Shifting",
+        "description": "Implement automated smart grid systems and flexible pricing tariffs for energy-intensive manufacturing plants, incentivizing them to schedule heavy operations when clean solar and wind power are peak and cheapest."
+      }
+    ]
+  },
+  "Industry-Heavy": {
+    "profile_name": "Manufacturing & Industrial Focus",
+    "simple_summary": "Most carbon emissions come from factories producing steel, cement, and chemical goods.",
+    "primary_challenge": "Most emissions come from heavy manufacturing, such as producing steel, cement, and chemicals. The main challenge is upgrading factory machinery and finding clean energy alternatives to the intense heat required for industrial production.",
+    "bottleneck": "Most emissions come from heavy manufacturing, such as producing steel, cement, and chemicals. The main challenge is upgrading factory machinery and finding clean energy alternatives to the intense heat required for industrial production.",
+    "xai_rule": "This country is classified as Industry-Heavy because heavy manufacturing, chemical refining, and materials production (such as steel and cement) account for the vast majority of its emissions. Decarbonizing industrial heat and chemical processes represents its most critical path toward net zero.",
+    "mathematical_bounding_rule": "IF Industry > 28.0% AND (Industry >= Energy OR CLR-Industry > +1.20) -> Industry-Heavy Economy",
+    "pathways": [
+      {
+        "title": "Switch Steelmaking to Clean Hydrogen",
+        "description": "Replace coal-based blast furnaces with direct reduced iron (DRI) units powered by green hydrogen produced from clean water electrolysis, cutting up to 95% of primary steelmaking emissions."
+      },
+      {
+        "title": "Capture Carbon from Cement Kilns",
+        "description": "Retrofit advanced carbon capture systems directly onto cement and lime calcination facilities to capture unavoidable process CO2 at the source and store it permanently in deep geological rock formations."
+      },
+      {
+        "title": "Recycle Factory Heat & Materials",
+        "description": "Interlink industrial facilities with high-temperature steam recovery loops to reuse waste thermal energy, and substitute virgin clinker with recycled slag to reduce energy-intensive processing."
+      }
+    ]
+  },
+  "Agriculture-Heavy": {
+    "profile_name": "Farming & Livestock Focus",
+    "simple_summary": "Most carbon emissions come from farming, raising livestock, and fertilizer use.",
+    "primary_challenge": "Most emissions come from livestock digestion (methane), chemical fertilizers, and land clearing. The main challenge is adopting sustainable farming practices and precision soil management without compromising national food security.",
+    "bottleneck": "Most emissions come from livestock digestion (methane), chemical fertilizers, and land clearing. The main challenge is adopting sustainable farming practices and precision soil management without compromising national food security.",
+    "xai_rule": "This country is classified as Agriculture-Heavy because farming operations, livestock herds, and crop fertilization constitute its primary source of greenhouse gas emissions. Adopting methane inhibitors, soil carbon management, and precision agriculture is vital to lowering its national footprint.",
+    "mathematical_bounding_rule": "IF Agriculture > 30.0% AND (Agriculture > Energy) -> Agriculture-Heavy Economy",
+    "pathways": [
+      {
+        "title": "Feed Natural Additives to Cattle",
+        "description": "Distribute natural seaweed extracts and specialized dietary supplements across commercial cattle and dairy herds to suppress digestive methane formation without reducing animal growth or milk yield."
+      },
+      {
+        "title": "Precision Fertilizer with GPS",
+        "description": "Deploy tractor-mounted optical sensors and satellite soil mapping to apply nitrogen fertilizer only where and when crops need it, preventing excess run-off and eliminating harmful nitrous oxide emissions."
+      },
+      {
+        "title": "Restore Healthy Soils & Plant Trees",
+        "description": "Introduce silvopasture practices by planting shade trees across grazing pastures, and incorporate biochar into agricultural acreage to naturally sequester atmospheric carbon into durable topsoil."
+      }
+    ]
+  },
+  "Transport-Heavy": {
+    "profile_name": "Transport & Logistics Focus",
+    "simple_summary": "Most carbon emissions come from cars, trucks, cargo ships, and commercial airplanes.",
+    "primary_challenge": "Most emissions come from gasoline and diesel used in cars, trucks, shipping, and aviation. The main challenge is building infrastructure for electric vehicles, expanding public transit, and adopting sustainable fuels for heavy freight.",
+    "bottleneck": "Most emissions come from gasoline and diesel used in cars, trucks, shipping, and aviation. The main challenge is building infrastructure for electric vehicles, expanding public transit, and adopting sustainable fuels for heavy freight.",
+    "xai_rule": "This country is classified as Transport-Heavy because domestic transit, freight corridors, and commercial shipping or aviation produce the highest share of its carbon emissions. Electrifying vehicle fleets and transitioning to sustainable transport fuels is its most mathematically impactful transition strategy.",
+    "mathematical_bounding_rule": "IF Transport > 25.0% AND (Transport > Energy OR CLR-Transport > +0.95) -> Transport-Heavy Economy",
+    "pathways": [
+      {
+        "title": "Electrify City Buses and Delivery Vans",
+        "description": "Transition public bus networks, municipal service fleets, and last-mile commercial delivery vans to pure battery-electric power, supported by high-speed depot charging hubs powered by renewable energy."
+      },
+      {
+        "title": "Plug Ships into Port Clean Electricity",
+        "description": "Equip major seaport docks with high-voltage shore power connections ('cold ironing') so maritime container vessels can turn off diesel auxiliary engines while loading, alongside green fuel bunkering."
+      },
+      {
+        "title": "Blend Sustainable Aviation Fuels",
+        "description": "Implement escalating blending mandates requiring airlines at commercial airport hubs to mix drop-in sustainable aviation fuels (SAF) derived from waste oils and hydrogen into conventional jet fuel."
+      }
+    ]
+  },
+  "Buildings-Heavy": {
+    "profile_name": "Heating & Buildings Focus",
+    "simple_summary": "Most carbon emissions come from burning oil and gas to heat houses, apartments, and office towers.",
+    "primary_challenge": "Most emissions come from the energy used to heat, cool, and light commercial and residential buildings. The main challenge is retrofitting older structures with better insulation and installing highly efficient electric heating systems.",
+    "bottleneck": "Most emissions come from the energy used to heat, cool, and light commercial and residential buildings. The main challenge is retrofitting older structures with better insulation and installing highly efficient electric heating systems.",
+    "xai_rule": "This country is classified as Buildings-Heavy because heating, cooling, and powering residential and commercial buildings dominate its national emissions profile. Rapidly upgrading building insulation and deploying high-efficiency heat pumps offers the fastest route to national emissions abatement.",
+    "mathematical_bounding_rule": "IF Buildings > 18.0% OR CLR-Buildings > +0.70 -> Buildings-Heavy Economy",
+    "pathways": [
+      {
+        "title": "Swap Gas Furnaces for Electric Heat Pumps",
+        "description": "Phase out fossil gas and oil boiler installations while providing targeted financial rebates for homeowners to install cold-climate electric heat pumps, delivering 3 to 4 times higher heating efficiency."
+      },
+      {
+        "title": "Upgrade Wall Insulation and Windows",
+        "description": "Mandate continuous exterior wall insulation, advanced weatherproofing airtightness seals, and triple-pane low-emissivity windows during residential and commercial renovations to cut heating loss."
+      },
+      {
+        "title": "Connect City Neighborhoods with Clean Heat",
+        "description": "Construct modern low-temperature hydronic district heating networks that harness surplus waste heat from municipal data centers, metro transit tunnels, and wastewater lines to warm entire communities."
+      }
+    ]
+  },
+  "suggested_comparisons": [
+    {
+      "id": "scenario_giants",
+      "title": "The Global Giants: USA, Brazil, Singapore",
+      "description": "Contrasts a large energy/transit nation, a major agricultural nation, and a dense transport/shipping hub.",
+      "countries": ["USA", "BRA", "SGP"]
+    },
+    {
+      "id": "scenario_baseload",
+      "title": "Baseload Heavyweights: China, India, Germany",
+      "description": "Compares three high-emission manufacturing and energy-dependent economies undergoing rapid energy transformation.",
+      "countries": ["CHN", "IND", "DEU"]
+    },
+    {
+      "id": "scenario_contrasts",
+      "title": "Contrasting Transition Profiles: Australia, New Zealand, Marshall Islands",
+      "description": "Examines an energy/mining exporter, a pastoral farming economy, and an island nation with high industrial ship registry.",
+      "countries": ["AUS", "NZL", "MHL"]
+    }
+  ]
+}

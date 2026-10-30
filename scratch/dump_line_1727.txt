@@ -1,0 +1,158 @@
+Created At: 2026-09-27T18:06:48+05:30
+Completed At: 2026-09-27T18:06:48+05:30
+File Path: `file:///c:/Users/shiva/OneDrive/Desktop/2CSE11/SEMESTER%205/major%20project/model/cO2%20pipeline/style.css`
+Total Lines: 3656
+Total Bytes: 74265
+Showing lines 151 to 300
+The following code has been modified to include a line number before every line, in the format: <line_number>: <original_line>. Please note that any changes targeting the original code should remove the line number, colon, and leading space.
+151: 
+152: .nav-item:hover {
+153:   background: var(--bg-card-subtle);
+154:   color: var(--text-main);
+155:   border-color: var(--border-subtle);
+156: }
+157: 
+158: .nav-item.active {
+159:   background: rgba(249, 115, 22, 0.1);
+160:   color: var(--accent-orange);
+161:   border-color: rgba(249, 115, 22, 0.3);
+162:   font-weight: 600;
+163: }
+164: 
+165: .nav-item .material-symbols-outlined {
+166:   font-size: 20px;
+167: }
+168: 
+169: /* Sidebar Footer */
+170: .sidebar-footer {
+171:   padding-top: 16px;
+172:   border-top: 1px solid var(--border-subtle);
+173:   font-size: 11px;
+174:   color: var(--text-dim);
+175:   line-height: 1.4;
+176: }
+177: 
+178: /* Main Content Wrapper */
+179: .main-wrapper {
+180:   margin-left: var(--sidebar-width);
+181:   flex: 1;
+182:   min-height: 100vh;
+183:   display: flex;
+184:   flex-direction: column;
+185: }
+186: 
+187: .content-container {
+188:   max-width: 1320px;
+189:   width: 100%;
+190:   margin: 0 auto;
+191:   padding: 32px 28px 64px 28px;
+192:   box-sizing: border-box;
+193: }
+194: 
+195: /* --------------------------------------------------------------------------
+196:    Sections Visibility
+197:    -------------------------------------------------------------------------- */
+198: .dashboard-section {
+199:   display: none;
+200:   animation: fadeIn 0.25s ease-out;
+201: }
+202: 
+203: .dashboard-section.active {
+204:   display: block;
+205: }
+206: 
+207: @keyframes fadeIn {
+208:   from { opacity: 0; transform: translateY(6px); }
+209:   to { opacity: 1; transform: translateY(0); }
+210: }
+211: 
+212: /* Section Header */
+213: .section-header {
+214:   margin-bottom: 28px;
+215: }
+216: 
+217: .section-tag {
+218:   display: inline-flex;
+219:   align-items: center;
+220:   gap: 6px;
+221:   padding: 3px 8px;
+222:   border-radius: var(--radius-sm);
+223:   background: rgba(139, 92, 246, 0.12);
+224:   border: 1px solid rgba(139, 92, 246, 0.25);
+225:   font-size: 11px;
+226:   font-weight: 600;
+227:   color: var(--accent-purple);
+228:   text-transform: uppercase;
+229:   letter-spacing: 0.05em;
+230:   margin-bottom: 8px;
+231: }
+232: 
+233: .section-title {
+234:   font-size: 28px;
+235:   font-weight: 700;
+236:   color: #fff;
+237:   line-height: 1.2;
+238: }
+239: 
+240: .section-desc {
+241:   font-size: 14px;
+242:   color: var(--text-muted);
+243:   margin-top: 6px;
+244:   max-width: 780px;
+245: }
+246: 
+247: /* --------------------------------------------------------------------------
+248:    Reusable Cards & Grids
+249:    -------------------------------------------------------------------------- */
+250: .card {
+251:   background: var(--bg-card);
+252:   border: 1px solid var(--border-color);
+253:   border-radius: var(--radius-lg);
+254:   padding: 24px;
+255:   box-shadow: var(--shadow-card);
+256:   margin-bottom: 24px;
+257:   transition: var(--transition);
+258: }
+259: 
+260: .card:hover {
+261:   border-color: #353544;
+262: }
+263: 
+264: .card-title {
+265:   font-size: 16px;
+266:   font-weight: 600;
+267:   color: #fff;
+268:   display: flex;
+269:   align-items: center;
+270:   gap: 8px;
+271:   margin-bottom: 6px;
+272: }
+273: 
+274: .card-desc {
+275:   font-size: 13px;
+276:   color: var(--text-muted);
+277:   margin-bottom: 18px;
+278: }
+279: 
+280: .grid-2 {
+281:   display: grid;
+282:   grid-template-columns: 1fr 1fr;
+283:   gap: 24px;
+284: }
+285: 
+286: .grid-3 {
+287:   display: grid;
+288:   grid-template-columns: repeat(3, 1fr);
+289:   gap: 20px;
+290: }
+291: 
+292: /* --------------------------------------------------------------------------
+293:    Top Bar: Searchable Country Dropdown
+294:    -------------------------------------------------------------------------- */
+295: .top-bar-card {
+296:   background: var(--bg-card);
+297:   border: 1px solid var(--border-color);
+298:   border-radius: var(--radius-lg);
+299:   padding: 20px 24px;
+300:   display: flex;
+The above content does NOT show the entire file contents. If you need to view any lines of the file which were not shown to complete your task, call this tool again to view those lines.

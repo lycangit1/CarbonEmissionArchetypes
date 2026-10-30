@@ -1,0 +1,190 @@
+{
+    "surrogate_tree_accuracy": 0.9822222222222222,
+    "features": [
+        "Energy",
+        "Industry",
+        "Transport",
+        "Agriculture",
+        "Buildings"
+    ],
+    "archetype_names": {
+        "0": "Energy-Dominant Economies",
+        "1": "Agriculture-Dominant Economies",
+        "2": "Industry-Dominant Micro-Economies",
+        "-1": "Outlier / Specialized Transit Economies"
+    },
+    "cluster_centroids": {
+        "-1": {
+            "cluster_id": -1,
+            "archetype_name": "Outlier / Specialized Transit Economies",
+            "country_count": 17,
+            "dominant_sector": "Transport",
+            "mean_proportions": {
+                "Energy": 0.1784,
+                "Industry": 0.1222,
+                "Transport": 0.396,
+                "Agriculture": 0.2298,
+                "Buildings": 0.0736
+            }
+        },
+        "0": {
+            "cluster_id": 0,
+            "archetype_name": "Energy-Dominant Economies",
+            "country_count": 196,
+            "dominant_sector": "Energy",
+            "mean_proportions": {
+                "Energy": 0.3081,
+                "Industry": 0.155,
+                "Transport": 0.2075,
+                "Agriculture": 0.2416,
+                "Buildings": 0.0878
+            }
+        },
+        "1": {
+            "cluster_id": 1,
+            "archetype_name": "Agriculture-Dominant Economies",
+            "country_count": 7,
+            "dominant_sector": "Agriculture",
+            "mean_proportions": {
+                "Energy": 0.0,
+                "Industry": 0.0614,
+                "Transport": 0.0,
+                "Agriculture": 0.9386,
+                "Buildings": 0.0
+            }
+        },
+        "2": {
+            "cluster_id": 2,
+            "archetype_name": "Industry-Dominant Micro-Economies",
+            "country_count": 5,
+            "dominant_sector": "Industry",
+            "mean_proportions": {
+                "Energy": 0.0,
+                "Industry": 1.0,
+                "Transport": 0.0,
+                "Agriculture": 0.0,
+                "Buildings": 0.0
+            }
+        }
+    },
+    "xai_rules": [
+        {
+            "cluster_id": 1,
+            "archetype_name": "Agriculture-Dominant Economies",
+            "sample_count": 9,
+            "conditions": [
+                "Energy <= 2.1%",
+                "Industry <= 75.0%",
+                "Buildings <= 0.0%"
+            ],
+            "rule_text": "IF Energy <= 2.1% AND Industry <= 75.0% AND Buildings <= 0.0% THEN Classify as Agriculture-Dominant Economies (Cluster 1)"
+        },
+        {
+            "cluster_id": -1,
+            "archetype_name": "Outlier / Specialized Transit Economies",
+            "sample_count": 6,
+            "conditions": [
+                "Energy <= 2.1%",
+                "Industry <= 75.0%",
+                "Buildings > 0.0%"
+            ],
+            "rule_text": "IF Energy <= 2.1% AND Industry <= 75.0% AND Buildings > 0.0% THEN Classify as Outlier / Specialized Transit Economies (Cluster -1)"
+        },
+        {
+            "cluster_id": 2,
+            "archetype_name": "Industry-Dominant Micro-Economies",
+            "sample_count": 5,
+            "conditions": [
+                "Energy <= 2.1%",
+                "Industry > 75.0%"
+            ],
+            "rule_text": "IF Energy <= 2.1% AND Industry > 75.0% THEN Classify as Industry-Dominant Micro-Economies (Cluster 2)"
+        },
+        {
+            "cluster_id": -1,
+            "archetype_name": "Outlier / Specialized Transit Economies",
+            "sample_count": 6,
+            "conditions": [
+                "Energy > 2.1%",
+                "Agriculture <= 0.0%"
+            ],
+            "rule_text": "IF Energy > 2.1% AND Agriculture <= 0.0% THEN Classify as Outlier / Specialized Transit Economies (Cluster -1)"
+        },
+        {
+            "cluster_id": -1,
+            "archetype_name": "Outlier / Specialized Transit Economies",
+            "sample_count": 1,
+            "conditions": [
+                "Energy > 2.1%",
+                "Agriculture > 0.0%",
+                "Buildings <= 0.1%"
+            ],
+            "rule_text": "IF Energy > 2.1% AND Agriculture > 0.0% AND Buildings <= 0.1% THEN Classify as Outlier / Specialized Transit Economies (Cluster -1)"
+        },
+        {
+            "cluster_id": 0,
+            "archetype_name": "Energy-Dominant Economies",
+            "sample_count": 198,
+            "conditions": [
+                "Energy > 2.1%",
+                "Agriculture > 0.0%",
+                "Buildings > 0.1%"
+            ],
+            "rule_text": "IF Energy > 2.1% AND Agriculture > 0.0% AND Buildings > 0.1% THEN Classify as Energy-Dominant Economies (Cluster 0)"
+        }
+    ],
+    "equivalence_calculations": [
+        {
+            "country_code": "USA",
+            "country_name": "United States",
+            "cluster_id": 0,
+            "archetype_name": "Energy-Dominant Economies",
+            "benchmark_reduction_pct": 5.0,
+            "country_total_emissions_Gg": 5713946.95,
+            "dominant_sector": "Energy",
+            "dominant_sector_baseline_emissions_Gg": 2207017.42,
+            "dominant_sector_share_pct": 38.63,
+            "delta_e_target_Gg": 285697.35,
+            "sector_activity_cut_pct": 12.94
+        },
+        {
+            "country_code": "ASM",
+            "country_name": "American Samoa",
+            "cluster_id": 1,
+            "archetype_name": "Agriculture-Dominant Economies",
+            "benchmark_reduction_pct": 5.0,
+            "country_total_emissions_Gg": 5.4,
+            "dominant_sector": "Agriculture",
+            "dominant_sector_baseline_emissions_Gg": 5.01,
+            "dominant_sector_share_pct": 92.92,
+            "delta_e_target_Gg": 0.27,
+            "sector_activity_cut_pct": 5.38
+        },
+        {
+            "country_code": "SGP",
+            "country_name": "Singapore",
+            "cluster_id": -1,
+            "archetype_name": "Outlier / Specialized Transit Economies",
+            "benchmark_reduction_pct": 5.0,
+            "country_total_emissions_Gg": 68199.97,
+            "dominant_sector": "Industry",
+            "dominant_sector_baseline_emissions_Gg": 34377.37,
+            "dominant_sector_share_pct": 50.41,
+            "delta_e_target_Gg": 3410.0,
+            "sector_activity_cut_pct": 9.92
+        },
+        {
+            "country_code": "MHL",
+            "country_name": "Marshall Islands",
+            "cluster_id": 2,
+            "archetype_name": "Industry-Dominant Micro-Economies",
+            "benchmark_reduction_pct": 5.0,
+            "country_total_emissions_Gg": 0.36,
+            "dominant_sector": "Industry",
+            "dominant_sector_baseline_emissions_Gg": 0.36,
+            "dominant_sector_share_pct": 100.0,
+            "delta_e_target_Gg": 0.02,
+            "sector_activity_cut_pct": 5.0
+        }
+    ]
+}

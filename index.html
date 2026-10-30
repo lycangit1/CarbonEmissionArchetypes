@@ -1,0 +1,1412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Global Carbon Emission Archetypes · Academic Dashboard</title>
+
+  <!-- Typography: Inter & Space Grotesk -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet"/>
+  
+  <!-- Material Symbols Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+
+  <!-- Chart.js for 5-Axis Radar Chart -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css?v=20261030_v4"/>
+</head>
+
+<body>
+  <div class="app-container">
+
+    <!-- ====================================================================
+         Sidebar Navigation
+         ==================================================================== -->
+    <aside class="sidebar">
+      <div class="brand-header">
+        <h1 class="brand-title">Global Carbon Archetypes</h1>
+        <p class="brand-subtitle">Unsupervised Machine Learning & Simplex CLR Analytics</p>
+      </div>
+
+      <nav class="sidebar-nav">
+        <button class="nav-item active" data-target="section-home">
+          <span class="material-symbols-outlined">dashboard</span>
+          <span>Home / Archetypes</span>
+        </button>
+
+        <button class="nav-item" data-target="section-similar">
+          <span class="material-symbols-outlined">layers</span>
+          <span>Countries with Similar Archetypes</span>
+        </button>
+
+        <button class="nav-item" data-target="section-equivalence">
+          <span class="material-symbols-outlined">balance</span>
+          <span>Equivalence Comparison Engine</span>
+        </button>
+
+        <button class="nav-item" data-target="section-evaluation">
+          <span class="material-symbols-outlined">leaderboard</span>
+          <span>Algorithm Evaluation</span>
+        </button>
+
+        <button class="nav-item" data-target="section-about">
+          <span class="material-symbols-outlined">menu_book</span>
+          <span>About / History</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <p><strong>EDGAR AR5 Emissions Data</strong></p>
+        <p>225 Sovereign Nations · Simplex CLR Calibrated</p>
+      </div>
+    </aside>
+
+    <!-- ====================================================================
+         Main Scrollable Application Area
+         ==================================================================== -->
+    <main class="main-wrapper">
+      <div class="content-container">
+
+        <!-- ================================================================
+             SECTION 1: Home / Archetypes
+             ================================================================ -->
+        <section id="section-home" class="dashboard-section active">
+          
+          <!-- Top Bar: Country Selector -->
+          <div class="top-bar-card">
+            <div class="country-selector-row">
+              <div>
+                <h2 class="card-title">
+                  <span class="material-symbols-outlined" style="color: var(--accent-orange)">public</span>
+                  <span>Inspect a Sovereign Nation</span>
+                </h2>
+                <p class="card-desc" style="margin-bottom: 0;">Search or select any of the 225 global sovereign parties.</p>
+              </div>
+
+              <!-- Searchable Dropdown Wrap -->
+              <div class="searchable-select-wrap">
+                <input type="text" id="country-search-input" class="search-input" placeholder="Search nation (e.g. India, USA, China)..." autocomplete="off"/>
+                <div id="country-search-results" class="search-results-dropdown"></div>
+              </div>
+            </div>
+
+            <!-- Quick Preset Pills -->
+            <div class="preset-pills-row">
+              <span class="preset-pill-label">Quick Select:</span>
+              <button class="preset-pill active" data-code="CHN">China</button>
+              <button class="preset-pill" data-code="USA">United States</button>
+              <button class="preset-pill" data-code="IND">India</button>
+              <button class="preset-pill" data-code="DEU">Germany</button>
+              <button class="preset-pill" data-code="BRA">Brazil</button>
+              <button class="preset-pill" data-code="SGP">Singapore</button>
+              <button class="preset-pill" data-code="AUS">Australia</button>
+              <button class="preset-pill" data-code="NZL">New Zealand</button>
+              <button class="preset-pill" data-code="GRL">Greenland</button>
+            </div>
+          </div>
+
+          <!-- Two Tracks: Track A (Static Baseline) & Track B (Dynamic Simulator) -->
+          <div class="grid-2">
+
+            <!-- TRACK A: Empirical Baseline (Static) -->
+            <div class="card" id="track-a-card">
+              <div class="track-header">
+                <div>
+                  <h3 class="card-title">Track A: Empirical Baseline</h3>
+                  <p class="card-desc" style="margin-bottom: 0;">Static empirical emissions footprint from EDGAR.</p>
+                </div>
+                <span class="track-badge static">Static Ground Truth</span>
+              </div>
+
+              <!-- Country Profile Summary -->
+              <div class="country-profile-card">
+                <div>
+                  <div class="country-profile-name">
+                    <span id="baseline-country-name">China</span>
+                    <span id="baseline-country-code" class="country-profile-code">CHN</span>
+                  </div>
+                  <div class="country-profile-emissions">
+                    Total Annual Emissions (Mt CO₂e/yr): <span id="baseline-total-emissions">15,112 Mt CO₂e/yr</span>
+                  </div>
+                </div>
+
+                <div id="baseline-archetype-badge" class="archetype-badge">
+                  <span class="material-symbols-outlined" id="baseline-badge-icon">bolt</span>
+                  <span id="baseline-badge-text">Energy-Heavy</span>
+                </div>
+              </div>
+
+              <!-- 5-Axis Radar Chart -->
+              <div class="radar-container">
+                <canvas id="baseline-radar-chart"></canvas>
+              </div>
+
+              <!-- Explainable AI (XAI) Card -->
+              <div class="xai-card">
+                <div class="xai-header">
+                  <div class="xai-title">
+                    <span class="material-symbols-outlined" style="color: var(--accent-orange); font-size: 18px;">psychology</span>
+                    <span>Explainable AI (XAI) Classification</span>
+                  </div>
+
+                  <!-- Hover Tooltip (i) with Mathematical Bounding Rule -->
+                  <div class="info-tooltip-wrap">
+                    <span class="info-tooltip-btn">i</span>
+                    <div class="tooltip-content">
+                      <strong>Mathematical Bounding Rule:</strong>
+                      <code id="xai-math-rule">IF Energy > 35.0% AND (Energy > Industry) AND (Energy > Agriculture) -> Energy-Heavy Economy [CLR-Energy > +0.85]</code>
+                      <p style="margin-top: 6px; font-size: 11px; color: #a1a1aa;">Calibrated via Centered Log-Ratio Euclidean minimum distance.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <h4 class="xai-subheading">Why this archetype?</h4>
+                <p id="xai-plain-rule" class="xai-explanation-text">
+                  This country is classified as Energy-Heavy because generating electricity and heat is its largest single source of carbon emissions, significantly exceeding the global average. Transitioning this specific sector is the most mathematically effective way to reduce the nation's overall footprint.
+                </p>
+              </div>
+
+              <!-- Real-World Decarbonization Measures (Fixed to Baseline) -->
+              <div>
+                <h4 class="card-title" style="font-size: 14px; margin-bottom: 10px;">
+                  <span class="material-symbols-outlined" style="color: var(--accent-emerald); font-size: 18px;">alt_route</span>
+                  <span>Real-World Decarbonization Measures (Baseline)</span>
+                </h4>
+                <div id="baseline-roadmap-container" class="measures-accordion-container">
+                  <!-- Dynamically populated measures accordions (<details> and <summary>) -->
+                </div>
+              </div>
+            </div>
+
+            <!-- TRACK B: What-If Simulator (Dynamic) -->
+            <div class="card" id="track-b-card">
+              <div class="track-header">
+                <div>
+                  <h3 class="card-title">Track B: What-If Simulator</h3>
+                  <p class="card-desc" style="margin-bottom: 0;">Adjust sectors; other sectors auto-rebalance to total 100%.</p>
+                </div>
+                <span class="track-badge dynamic">Dynamic Simulation</span>
+              </div>
+
+              <!-- 5 Range Sliders -->
+              <div class="sliders-group">
+
+                <!-- Slider 1: Energy -->
+                <div class="slider-card">
+                  <div class="slider-card-top">
+                    <span class="slider-sector-title">
+                      <span class="sector-dot energy"></span>
+                      <span>Power Generation & Energy</span>
+                    </span>
+                    <div class="slider-values">
+                      <span id="energy-mt" class="slider-mt">8,064 Mt</span>
+                      <span id="energy-val" class="slider-pct" style="color: var(--accent-orange)">54%</span>
+                    </div>
+                  </div>
+                  <div class="slider-range-wrap">
+                    <button class="step-btn" data-sector="Energy" data-step="-1">-</button>
+                    <input type="range" id="slider-energy" min="0" max="100" value="54" data-sector="Energy"/>
+                    <button class="step-btn" data-sector="Energy" data-step="1">+</button>
+                  </div>
+                </div>
+
+                <!-- Slider 2: Industry -->
+                <div class="slider-card">
+                  <div class="slider-card-top">
+                    <span class="slider-sector-title">
+                      <span class="sector-dot industry"></span>
+                      <span>Manufacturing & Heavy Industry</span>
+                    </span>
+                    <div class="slider-values">
+                      <span id="industry-mt" class="slider-mt">4,685 Mt</span>
+                      <span id="industry-val" class="slider-pct" style="color: var(--accent-purple)">31%</span>
+                    </div>
+                  </div>
+                  <div class="slider-range-wrap">
+                    <button class="step-btn" data-sector="Industry" data-step="-1">-</button>
+                    <input type="range" id="slider-industry" min="0" max="100" value="31" data-sector="Industry"/>
+                    <button class="step-btn" data-sector="Industry" data-step="1">+</button>
+                  </div>
+                </div>
+
+                <!-- Slider 3: Transport -->
+                <div class="slider-card">
+                  <div class="slider-card-top">
+                    <span class="slider-sector-title">
+                      <span class="sector-dot transport"></span>
+                      <span>Domestic & International Transport</span>
+                    </span>
+                    <div class="slider-values">
+                      <span id="transport-mt" class="slider-mt">907 Mt</span>
+                      <span id="transport-val" class="slider-pct" style="color: var(--accent-cyan)">6%</span>
+                    </div>
+                  </div>
+                  <div class="slider-range-wrap">
+                    <button class="step-btn" data-sector="Transport" data-step="-1">-</button>
+                    <input type="range" id="slider-transport" min="0" max="100" value="6" data-sector="Transport"/>
+                    <button class="step-btn" data-sector="Transport" data-step="1">+</button>
+                  </div>
+                </div>
+
+                <!-- Slider 4: Agriculture -->
+                <div class="slider-card">
+                  <div class="slider-card-top">
+                    <span class="slider-sector-title">
+                      <span class="sector-dot agriculture"></span>
+                      <span>Agriculture, Livestock & Land Use</span>
+                    </span>
+                    <div class="slider-values">
+                      <span id="agriculture-mt" class="slider-mt">756 Mt</span>
+                      <span id="agriculture-val" class="slider-pct" style="color: var(--accent-emerald)">5%</span>
+                    </div>
+                  </div>
+                  <div class="slider-range-wrap">
+                    <button class="step-btn" data-sector="Agriculture" data-step="-1">-</button>
+                    <input type="range" id="slider-agriculture" min="0" max="100" value="5" data-sector="Agriculture"/>
+                    <button class="step-btn" data-sector="Agriculture" data-step="1">+</button>
+                  </div>
+                </div>
+
+                <!-- Slider 5: Buildings -->
+                <div class="slider-card">
+                  <div class="slider-card-top">
+                    <span class="slider-sector-title">
+                      <span class="sector-dot buildings"></span>
+                      <span>Residential & Commercial Buildings</span>
+                    </span>
+                    <div class="slider-values">
+                      <span id="buildings-mt" class="slider-mt">604 Mt</span>
+                      <span id="buildings-val" class="slider-pct" style="color: var(--accent-amber)">4%</span>
+                    </div>
+                  </div>
+                  <div class="slider-range-wrap">
+                    <button class="step-btn" data-sector="Buildings" data-step="-1">-</button>
+                    <input type="range" id="slider-buildings" min="0" max="100" value="4" data-sector="Buildings"/>
+                    <button class="step-btn" data-sector="Buildings" data-step="1">+</button>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Proportions Visualizer Bar -->
+              <div class="proportions-bar-wrap">
+                <div class="proportions-bar-header">
+                  <span>Simplex Sector Balance</span>
+                  <span id="slider-sum-text" style="color: var(--accent-emerald)">Exact 100% Sum</span>
+                </div>
+                <div class="proportions-bar">
+                  <div id="bar-energy" class="bar-segment energy" style="width: 54%;"></div>
+                  <div id="bar-industry" class="bar-segment industry" style="width: 31%;"></div>
+                  <div id="bar-transport" class="bar-segment transport" style="width: 6%;"></div>
+                  <div id="bar-agriculture" class="bar-segment agriculture" style="width: 5%;"></div>
+                  <div id="bar-buildings" class="bar-segment buildings" style="width: 4%;"></div>
+                </div>
+              </div>
+
+              <!-- Dynamic Predicted Future Archetype Readout -->
+              <div class="predicted-archetype-card" id="predicted-archetype-card">
+                <div class="predicted-info">
+                  <div class="predicted-icon" id="predicted-archetype-icon">
+                    <span class="material-symbols-outlined">bolt</span>
+                  </div>
+                  <div>
+                    <span class="predicted-title-label">Predicted Future Archetype</span>
+                    <div id="predicted-archetype-name" class="predicted-archetype-name">Energy-Heavy</div>
+                    <p id="predicted-transition-desc" style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">
+                      Current simulated allocation aligns with the Energy-Heavy transition group.
+                    </p>
+                  </div>
+                </div>
+
+                <button id="reset-simulator-btn" class="reset-simulator-btn">
+                  <span class="material-symbols-outlined" style="font-size: 16px;">restart_alt</span>
+                  <span>Reset to Baseline</span>
+                </button>
+              </div>
+
+            </div>
+
+          </div>
+        </section>
+
+
+        <!-- ================================================================
+             SECTION 2: Countries with Similar Archetypes (Accordion UI)
+             ================================================================ -->
+        <section id="section-similar" class="dashboard-section">
+          <div class="section-header">
+            <span class="section-tag">Archetype Directory</span>
+            <h2 class="section-title">Countries with Similar Archetypes</h2>
+            <p class="section-desc">
+              Explore how 225 nations cluster into 5 structural archetypes. Click any archetype accordion to view its shared bottleneck and complete roster of countries with their dominant sector shares.
+            </p>
+          </div>
+
+          <!-- Accordion Group for the 5 Archetypes -->
+          <div id="archetype-accordion-container" class="accordion-group">
+            <!-- Dynamically populated from /api/data and /api/catalog -->
+          </div>
+        </section>
+
+
+        <!-- ================================================================
+             SECTION 3: Equivalence Comparison Engine
+             ================================================================ -->
+        <section id="section-equivalence" class="dashboard-section">
+          <div class="section-header-row">
+            <div class="section-header-main">
+              <span class="section-tag">Policy Benchmark Engine</span>
+              <h2 class="section-title">Equivalence Comparison Engine</h2>
+              <p class="section-desc">
+                Explore how an identical carbon reduction target requires completely different real-world actions depending on a country's economic structure. Select three countries to compare, set your own custom reduction target based on the cleanest country (the benchmark), and discover exactly how much each nation must cut from its largest sector to achieve the exact same global climate impact.
+              </p>
+            </div>
+
+            <!-- Top-Right Dropdown Menu for Benchmark Leaderboard (Issue 5) -->
+            <div class="benchmark-dropdown-wrapper">
+              <details class="benchmark-dropdown-accordion" id="benchmark-dropdown-menu">
+                <summary class="benchmark-dropdown-toggle">
+                  <div class="toggle-content">
+                    <span class="material-symbols-outlined" style="color: var(--accent-emerald); font-size: 19px;">emoji_events</span>
+                    <span class="toggle-title">Benchmark Leaderboard</span>
+                  </div>
+                  <span class="material-symbols-outlined toggle-chevron">expand_more</span>
+                </summary>
+                
+                <div class="benchmark-dropdown-panel">
+                  <div class="dropdown-panel-header">
+                    <div>
+                      <h4 class="dropdown-panel-title">Lowest Total Annual Emissions (Mt CO₂e/yr) per Archetype</h4>
+                      <p class="dropdown-panel-desc">Reference sovereign anchors setting the lowest carbon baseline in each structural archetype.</p>
+                    </div>
+                  </div>
+                  <div id="benchmark-leaderboard-list" class="benchmark-list">
+                    <!-- Dynamically populated 5 benchmark cards -->
+                  </div>
+                </div>
+              </details>
+            </div>
+          </div>
+
+          <!-- Suggested Comparisons Row -->
+          <div class="suggested-scenarios-row">
+            <span class="preset-pill-label">Suggested Scenarios:</span>
+            <button class="suggested-scenario-btn" data-scenario="0">
+              <span class="material-symbols-outlined" style="font-size: 16px; color: var(--accent-orange)">public</span>
+              <span>The Global Giants: USA, Brazil, Singapore</span>
+            </button>
+            <button class="suggested-scenario-btn" data-scenario="1">
+              <span class="material-symbols-outlined" style="font-size: 16px; color: var(--accent-purple)">factory</span>
+              <span>Baseload Heavyweights: China, India, Germany</span>
+            </button>
+            <button class="suggested-scenario-btn" data-scenario="2">
+              <span class="material-symbols-outlined" style="font-size: 16px; color: var(--accent-cyan)">alt_route</span>
+              <span>Contrasting Transition Profiles: Australia, New Zealand, Marshall Islands</span>
+            </button>
+          </div>
+
+          <!-- 3 Country Selectors with Dynamic Benchmark Identification -->
+          <div class="comparison-slots-grid">
+            <div class="compare-slot" id="compare-slot-1">
+              <div class="compare-slot-header">
+                <label class="compare-slot-label" for="compare-country-1">Country 1 (Slot A)</label>
+                <span class="slot-benchmark-badge" id="slot-badge-1" style="display: none;">🏆 Anchor (Benchmark)</span>
+              </div>
+              <select id="compare-country-1" class="compare-dropdown"></select>
+            </div>
+            <div class="compare-slot" id="compare-slot-2">
+              <div class="compare-slot-header">
+                <label class="compare-slot-label" for="compare-country-2">Country 2 (Slot B)</label>
+                <span class="slot-benchmark-badge" id="slot-badge-2" style="display: none;">🏆 Anchor (Benchmark)</span>
+              </div>
+              <select id="compare-country-2" class="compare-dropdown"></select>
+            </div>
+            <div class="compare-slot" id="compare-slot-3">
+              <div class="compare-slot-header">
+                <label class="compare-slot-label" for="compare-country-3">Country 3 (Slot C)</label>
+                <span class="slot-benchmark-badge" id="slot-badge-3" style="display: none;">🏆 Anchor (Benchmark)</span>
+              </div>
+              <select id="compare-country-3" class="compare-dropdown"></select>
+            </div>
+          </div>
+
+          <!-- Quality Meter -->
+          <div class="quality-meter-card">
+            <div class="quality-meter-top">
+              <span class="quality-meter-title">Structural Comparison Diversity Meter</span>
+              <span id="quality-status-badge" class="quality-status-badge" style="background: rgba(16, 185, 129, 0.15); color: var(--accent-emerald);">
+                🟢 Excellent Match (Maximum Structural Diversity)
+              </span>
+            </div>
+            <div class="quality-meter-track">
+              <div id="quality-meter-fill" class="quality-meter-fill"></div>
+            </div>
+          </div>
+
+          <!-- Policy Simulator: Interactive Country Simulation Cards -->
+          <div class="card simulator-card">
+            <div class="simulator-header">
+              <div class="simulator-title-wrap">
+                <span class="material-symbols-outlined simulator-title-icon">tune</span>
+                <div>
+                  <h3 class="card-title">Interactive Target Simulator: Equal Impact, Different Actions</h3>
+                  <p class="card-desc" style="margin-bottom: 0;">
+                    Zero-latency policy simulator expressing structural equivalence. Adjust the global target lever to see required sector cuts across all three economies.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tactile Control Panel Lever (Slider UI) -->
+            <div class="control-lever-panel">
+              <div class="control-lever-top">
+                <div class="control-lever-label-group">
+                  <span class="material-symbols-outlined lever-icon">tune</span>
+                  <span class="lever-title">Adjust Global Reduction Target:</span>
+                  <span id="target-slider-val" class="lever-value-badge">[ 5% ]</span>
+                </div>
+                <div class="lever-meta-info">
+                  <span class="lever-meta-item">Benchmark: <strong id="lever-anchor-name">Singapore</strong></span>
+                  <span class="lever-dot">•</span>
+                  <span class="lever-meta-item">Target Reduction: <strong id="lever-target-tonnage">3.410 Mt CO₂e/yr</strong></span>
+                </div>
+              </div>
+
+              <div class="control-lever-track-wrap">
+                <button class="target-step-btn" id="target-step-down" type="button" aria-label="Decrease target by 1%">-</button>
+                <div class="lever-input-container">
+                  <input type="range" id="target-reduction-slider" class="control-lever-range" min="1" max="25" value="5" step="1"/>
+                  <div class="lever-ticks">
+                    <span>1%</span>
+                    <span>5%</span>
+                    <span>10%</span>
+                    <span>15%</span>
+                    <span>20%</span>
+                    <span>25%</span>
+                  </div>
+                </div>
+                <button class="target-step-btn" id="target-step-up" type="button" aria-label="Increase target by 1%">+</button>
+              </div>
+            </div>
+
+            <!-- The "Mission Briefing" (Dynamic Real-Time Text Summary) -->
+            <div class="mission-briefing-box" id="mission-briefing-box">
+              <div class="mission-briefing-header">
+                <div class="mission-briefing-badge">
+                  <span class="material-symbols-outlined" style="font-size: 16px;">radar</span>
+                  <span>Simulation Briefing</span>
+                </div>
+                <span class="mission-status-live">● Live Model Output</span>
+              </div>
+              <div class="mission-briefing-body" id="mission-briefing-text">
+                <!-- Dynamically populated in real-time -->
+              </div>
+            </div>
+
+            <!-- Country Simulation Cards Container (Replaces HTML <table>) -->
+            <div class="sim-cards-grid" id="sim-cards-container">
+              <!-- Dynamically populated 3 simulation cards -->
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ================================================================
+             SECTION 4: Algorithm Evaluation (Scoreboard)
+             ================================================================ -->
+        <section id="section-evaluation" class="dashboard-section">
+          <div class="section-header">
+            <span class="section-tag">Machine Learning Benchmarks</span>
+            <h2 class="section-title">Algorithm Evaluation (Scoreboard)</h2>
+            <p class="section-desc">
+              Multi-algorithm evaluation across internal cluster validation indices to objectively determine optimal grouping without human labeling bias.
+            </p>
+          </div>
+
+          <!-- Bold Winner Card -->
+          <div class="winner-hero-card">
+            <div class="winner-hero-content">
+              <div class="winner-crown-pill">
+                <span class="material-symbols-outlined" style="font-size: 16px;">emoji_events</span>
+                <span>Consensus Winner · Optimal Model</span>
+              </div>
+              <h3 class="winner-name">K-Means Clustering</h3>
+              <p class="winner-desc">
+                K-Means partitions the dataset by grouping countries that share similar structural emission profiles, minimizing the variance between each country and its assigned cluster center. Because national sectoral shares always sum to 100%, evaluating them directly causes statistical distortions. We correct this using a Centered Log-Ratio (CLR) transformation. This mathematical projection allows K-Means to accurately calculate distances, yielding the highest cluster separation (Silhouette Score) and maximum internal density (Calinski-Harabasz Index) across all tested models.
+              </p>
+            </div>
+
+            <div class="winner-score-badge">
+              <span class="winner-score-label">Consensus Score</span>
+              <div class="winner-score-val">0.945</div>
+              <span style="font-size: 11px; color: var(--accent-emerald);">Rank 1 across all metrics</span>
+            </div>
+          </div>
+
+          <!-- 1. The "Why K-Means Won" Visual: Side-by-Side 2D Cluster Maps -->
+          <div class="cluster-comparison-section">
+            <div class="comparison-section-header">
+              <div class="comparison-title-wrap">
+                <span class="material-symbols-outlined comp-icon">bubble_chart</span>
+                <div>
+                  <h3 class="card-title">Why K-Means Won: 2D Cluster Separation</h3>
+                  <p class="card-desc">
+                    2D dimensionality reduction maps the 5-sector economy into simple topological "islands", visually demonstrating why K-Means succeeded while density-based models failed.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="cluster-maps-grid">
+              <!-- Left Panel: The Winner (K-Means) -->
+              <div class="card cluster-map-card winner-map-card">
+                <div class="cluster-map-header">
+                  <div class="cluster-map-badge-row">
+                    <span class="cluster-status-badge winner-badge">
+                      <span class="material-symbols-outlined" style="font-size: 13px;">check_circle</span>
+                      <span>The Winner · 5 Distinct Clusters</span>
+                    </span>
+                  </div>
+                  <h4 class="cluster-map-title">K-Means: 5 Distinct Economic Groups</h4>
+                  <p class="cluster-map-desc">
+                    Countries cleanly separate into 5 distinct, well-defined archetype islands with dense centroids and wide decision boundaries.
+                  </p>
+                </div>
+
+                <div class="cluster-canvas-wrap">
+                  <canvas id="kmeans-2d-canvas"></canvas>
+                </div>
+
+                <div class="cluster-legend-bar">
+                  <span class="cleg-item"><span class="cleg-dot" style="background: #c2410c;"></span>Energy-Heavy</span>
+                  <span class="cleg-item"><span class="cleg-dot" style="background: #047857;"></span>Agriculture-Heavy</span>
+                  <span class="cleg-item"><span class="cleg-dot" style="background: #b91c1c;"></span>Transport-Heavy</span>
+                  <span class="cleg-item"><span class="cleg-dot" style="background: #3730a3;"></span>Industry-Heavy</span>
+                  <span class="cleg-item"><span class="cleg-dot" style="background: #6b21a8;"></span>Buildings-Heavy</span>
+                </div>
+              </div>
+
+              <!-- Right Panel: The Discarded Model (DBSCAN | Hierarchical | GMM) -->
+              <div class="card cluster-map-card discarded-map-card">
+                <div class="cluster-map-header">
+                  <div class="cluster-map-badge-row">
+                    <span class="cluster-status-badge discarded-badge">
+                      <span class="material-symbols-outlined" style="font-size: 13px;">cancel</span>
+                      <span id="discarded-badge-text">Discarded Model · Noise Failure</span>
+                    </span>
+                    <!-- Discarded Model Toggle Navigation -->
+                    <div class="discarded-model-toggle-group" id="discarded-model-toggles">
+                      <button type="button" class="discarded-toggle-pill active" data-model="dbscan">DBSCAN</button>
+                      <button type="button" class="discarded-toggle-pill" data-model="hierarchical">Hierarchical</button>
+                      <button type="button" class="discarded-toggle-pill" data-model="gmm">GMM</button>
+                    </div>
+                  </div>
+                  <h4 class="cluster-map-title" id="discarded-map-title">DBSCAN: Failed (Undivided Noise)</h4>
+                  <p class="cluster-map-desc" id="discarded-map-desc">
+                    DBSCAN grouped 164 countries into a single undifferentiated grey mass and discarded 49 sovereign nations as unclassifiable "noise".
+                  </p>
+                </div>
+
+                <div class="cluster-canvas-wrap">
+                  <canvas id="dbscan-2d-canvas"></canvas>
+                </div>
+
+                <div class="cluster-legend-bar" id="discarded-legend-bar">
+                  <span class="cleg-item"><span class="cleg-dot" style="background: #94a3b8;"></span>Single Undivided Mass (176 nations)</span>
+                  <span class="cleg-item"><span class="cleg-dot" style="background: #ef4444;"></span>Unclassifiable Noise (49 nations)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. The Scoreboard Bar Chart: Silhouette Score Comparison -->
+          <div class="card silhouette-chart-card">
+            <div class="silhouette-header-row">
+              <div class="silhouette-title-wrap">
+                <span class="material-symbols-outlined sil-icon">leaderboard</span>
+                <div>
+                  <h3 class="card-title">Silhouette Score Comparison (Higher is Better)</h3>
+                  <p class="card-desc">
+                    Measures how cleanly separated each cluster is from its nearest neighbor. K-Means decisively outperforms all alternatives.
+                  </p>
+                </div>
+              </div>
+              <div class="silhouette-score-badge">
+                <span class="sil-badge-label">Winning Score:</span>
+                <span class="sil-badge-val">0.479</span>
+              </div>
+            </div>
+
+            <div class="silhouette-canvas-container">
+              <canvas id="silhouette-bar-canvas"></canvas>
+            </div>
+          </div>
+
+          <!-- Validation Metrics Comparison Table (Spaced & Rigorous) -->
+          <div class="card metrics-table-card">
+            <h3 class="card-title">Validation Metrics Comparison Table</h3>
+            <p class="card-desc">Evaluating 4 clustering algorithms on CLR-transformed compositional data.</p>
+
+            <div class="results-table-wrap">
+              <table class="results-table">
+                <thead>
+                  <tr>
+                    <th>Metric (Friendly Name)</th>
+                    <th>Scale & Criterion</th>
+                    <th>Simple English Explanation</th>
+                    <th>K-Means (Winner)</th>
+                    <th>Hierarchical</th>
+                    <th>GMM</th>
+                    <th>DBSCAN</th>
+                  </tr>
+                </thead>
+                <tbody id="metrics-table-body">
+                  <!-- Populated dynamically from /api/evaluate_models -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Discarded Algorithms List -->
+          <div>
+            <h3 class="card-title" style="margin-bottom: 14px;">Discarded Alternative Algorithms</h3>
+            <div id="discarded-algorithms-container" class="discarded-grid">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ================================================================
+             SECTION 5: About / History
+             ================================================================ -->
+        <section id="section-about" class="dashboard-section">
+          <!-- Section Main Header -->
+          <div class="section-header">
+            <h2 class="section-title">Discovering Global Carbon Emission Archetypes Through Unsupervised Learning</h2>
+            <p class="section-desc">
+              Academic methodology, mathematical foundations, data provenance, and explainable climate policy frameworks for multi-national decarbonization.
+            </p>
+          </div>
+
+          <!-- Selector Lights Tab Navigation -->
+          <div class="about-selector-nav">
+            <div class="selector-lights-track" role="tablist" aria-label="Documentation Section Selector">
+              <button class="about-tab-btn active" data-tab="tab-panel-problem" type="button" role="tab" aria-selected="true">
+                <span class="selector-light-dot"></span>
+                <span class="tab-label">Problem & Objectives</span>
+              </button>
+              <button class="about-tab-btn" data-tab="tab-panel-methodology" type="button" role="tab" aria-selected="false">
+                <span class="selector-light-dot"></span>
+                <span class="tab-label">Methodology & Workflow</span>
+              </button>
+              <button class="about-tab-btn" data-tab="tab-panel-archetypes" type="button" role="tab" aria-selected="false">
+                <span class="selector-light-dot"></span>
+                <span class="tab-label">The 5 Archetypes & Policies</span>
+              </button>
+              <button class="about-tab-btn" data-tab="tab-panel-data" type="button" role="tab" aria-selected="false">
+                <span class="selector-light-dot"></span>
+                <span class="tab-label">Data & Scope</span>
+              </button>
+              <button class="about-tab-btn" data-tab="tab-panel-literature" type="button" role="tab" aria-selected="false">
+                <span class="selector-light-dot"></span>
+                <span class="tab-label">Literature & Research</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- ============================================================
+               TAB 1: Problem & Objectives
+               ============================================================ -->
+          <div class="about-tab-panel active" id="tab-panel-problem" role="tabpanel">
+            <div class="about-dual-grid">
+              <!-- The Problem Statement Card -->
+              <div class="card about-hero-card problem-card">
+                <div class="about-card-badge danger-badge">
+                  <span class="material-symbols-outlined" style="font-size: 14px;">warning</span>
+                  <span>The Fundamental Flaw</span>
+                </div>
+                <h3 class="about-card-title">The Flaw in Global Climate Accounting: Absolute vs. Structural Metrics</h3>
+                <p class="about-card-text">
+                  Global climate diplomacy and emissions tracking historically evaluate sovereign states using either <strong>gross absolute emissions</strong> (Mt CO₂e/yr) or <strong>per-capita metrics</strong>. While politically ubiquitous, these metrics induce severe systemic distortions.
+                </p>
+                <p class="about-card-text">
+                  Gross volumes unfairly penalize large developing economies with massive populations, while per-capita averages mask underlying economic concentration. Crucially, both metrics obscure the <strong>physical shape and structural bottlenecks</strong> of national economies.
+                </p>
+                <div class="about-callout-quote">
+                  <span class="material-symbols-outlined quote-icon">format_quote</span>
+                  <p>
+                    A uniform, blanket reduction target (e.g., "Cut total emissions by 5%") demands radically disparate physical actions: for an agrarian economy like New Zealand or Uruguay, it requires biological livestock feed interventions; for an industrialized powerhouse like China or Germany, it demands multi-billion-dollar steel furnace retrofits and heavy grid overhauls.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Our Solution Card -->
+              <div class="card about-hero-card solution-card">
+                <div class="about-card-badge success-badge">
+                  <span class="material-symbols-outlined" style="font-size: 14px;">verified</span>
+                  <span>The Mathematical Innovation</span>
+                </div>
+                <h3 class="about-card-title">Unsupervised Compositional Learning: Structural Archetypes</h3>
+                <p class="about-card-text">
+                  Our framework reconceptualizes national greenhouse gas accounting as <strong>compositional data</strong>—treating emissions not as independent raw magnitudes, but as relative proportions constrained to sum strictly to 100% across the five primary macroeconomic sectors.
+                </p>
+                <p class="about-card-text">
+                  By stripping away population and GDP scale biases, unsupervised machine learning discovers the intrinsic structural emission profiles of sovereign states. Nations coalesce into natural archetypes based purely on their sectoral transition bottlenecks rather than geographical borders or political blocs.
+                </p>
+                <div class="about-feature-pills">
+                  <span class="feat-pill"><span class="feat-dot"></span>Zero Scale Distortion</span>
+                  <span class="feat-pill"><span class="feat-dot"></span>Aitchison Simplex Geometry</span>
+                  <span class="feat-pill"><span class="feat-dot"></span>Unbiased Clustering</span>
+                  <span class="feat-pill"><span class="feat-dot"></span>Objective Policy Equivalence</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project Objectives (4 Grid Cards) -->
+            <div class="objectives-section-wrap">
+              <h3 class="about-section-heading">Project Research Objectives</h3>
+              <div class="objectives-grid">
+                <div class="card objective-card">
+                  <div class="obj-number">01</div>
+                  <div class="obj-icon-wrap" style="color: var(--accent-cyan); background: rgba(6, 182, 212, 0.1);">
+                    <span class="material-symbols-outlined">data_object</span>
+                  </div>
+                  <h4 class="obj-title">Data Engineering</h4>
+                  <p class="obj-desc">
+                    Harmonize sector-wise historical emissions across 225 sovereign nations. Address the Aitchison simplex constraint through Centered Log-Ratio (CLR) transformations to ensure statistical validity in continuous Euclidean space.
+                  </p>
+                </div>
+
+                <div class="card objective-card">
+                  <div class="obj-number">02</div>
+                  <div class="obj-icon-wrap" style="color: var(--accent-emerald); background: rgba(16, 185, 129, 0.1);">
+                    <span class="material-symbols-outlined">hub</span>
+                  </div>
+                  <h4 class="obj-title">Pattern Discovery</h4>
+                  <p class="obj-desc">
+                    Deploy unsupervised machine learning algorithms to discover authentic, unbiased carbon transition archetypes, grouping nations by structural decarbonization challenges without human labeling bias.
+                  </p>
+                </div>
+
+                <div class="card objective-card">
+                  <div class="obj-number">03</div>
+                  <div class="obj-icon-wrap" style="color: var(--accent-orange); background: rgba(249, 115, 22, 0.1);">
+                    <span class="material-symbols-outlined">query_stats</span>
+                  </div>
+                  <h4 class="obj-title">Mathematical Validation</h4>
+                  <p class="obj-desc">
+                    Subject competing clustering paradigms (K-Means, GMM, Hierarchical, DBSCAN) to rigorous internal cluster validation indices (Silhouette, Davies-Bouldin, Calinski-Harabasz) to prove optimal mathematical separation.
+                  </p>
+                </div>
+
+                <div class="card objective-card">
+                  <div class="obj-number">04</div>
+                  <div class="obj-icon-wrap" style="color: #a855f7; background: rgba(168, 85, 247, 0.1);">
+                    <span class="material-symbols-outlined">balance</span>
+                  </div>
+                  <h4 class="obj-title">Policy Equivalence</h4>
+                  <p class="obj-desc">
+                    Construct an interactive, zero-latency Equivalence Simulation Engine to demonstrate how identical global tonnage reductions require differentiated, sector-specific strain depending on national economic composition.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ============================================================
+               TAB 2: Methodology & Workflow
+               ============================================================ -->
+          <div class="about-tab-panel" id="tab-panel-methodology" role="tabpanel">
+            <!-- 3D Isometric Workflow Diagram -->
+            <div class="card iso-diagram-card">
+              <div class="iso-card-header">
+                <span class="material-symbols-outlined iso-icon">view_in_ar</span>
+                <div>
+                  <h3 class="card-title">End-to-End Architectural Pipeline (3D Isometric Flow)</h3>
+                  <p class="card-desc">Hover over blocks to inspect mathematical transformations and pipeline transitions.</p>
+                </div>
+              </div>
+
+              <div class="iso-stage-container">
+                <div class="iso-isometric-stage">
+                  <!-- Block 1: Raw Sector Data -->
+                  <div class="iso-block iso-block-1">
+                    <div class="iso-face iso-top">
+                      <span class="iso-step-tag">Step 01</span>
+                      <span class="iso-title">Raw Sector Data</span>
+                    </div>
+                    <div class="iso-face iso-front">
+                      <span class="iso-sub">225 Sovereign States</span>
+                      <span class="iso-math">5 Macro Sectors (Simplex S⁴)</span>
+                    </div>
+                    <div class="iso-face iso-side"></div>
+                  </div>
+
+                  <!-- Connector Arrow 1 -->
+                  <div class="iso-connector">
+                    <span class="iso-line"></span>
+                    <span class="material-symbols-outlined iso-arrow">arrow_forward</span>
+                  </div>
+
+                  <!-- Block 2: CLR Transformation -->
+                  <div class="iso-block iso-block-2">
+                    <div class="iso-face iso-top">
+                      <span class="iso-step-tag">Step 02</span>
+                      <span class="iso-title">CLR Projection</span>
+                    </div>
+                    <div class="iso-face iso-front">
+                      <span class="iso-sub">Isometric Isomorphism</span>
+                      <span class="iso-math">clr(x) = ln(x/g(x)) in ℝ⁵</span>
+                    </div>
+                    <div class="iso-face iso-side"></div>
+                  </div>
+
+                  <!-- Connector Arrow 2 -->
+                  <div class="iso-connector">
+                    <span class="iso-line"></span>
+                    <span class="material-symbols-outlined iso-arrow">arrow_forward</span>
+                  </div>
+
+                  <!-- Block 3: K-Means Clustering -->
+                  <div class="iso-block iso-block-3">
+                    <div class="iso-face iso-top">
+                      <span class="iso-step-tag">Step 03</span>
+                      <span class="iso-title">K-Means Cluster</span>
+                    </div>
+                    <div class="iso-face iso-front">
+                      <span class="iso-sub">Optimal Inertia</span>
+                      <span class="iso-math">Silhouette: 0.714 · k=5</span>
+                    </div>
+                    <div class="iso-face iso-side"></div>
+                  </div>
+
+                  <!-- Connector Arrow 3 -->
+                  <div class="iso-connector">
+                    <span class="iso-line"></span>
+                    <span class="material-symbols-outlined iso-arrow">arrow_forward</span>
+                  </div>
+
+                  <!-- Block 4: XAI Policy Mapping -->
+                  <div class="iso-block iso-block-4">
+                    <div class="iso-face iso-top">
+                      <span class="iso-step-tag">Step 04</span>
+                      <span class="iso-title">XAI Policy Mapping</span>
+                    </div>
+                    <div class="iso-face iso-front">
+                      <span class="iso-sub">Decision Trees</span>
+                      <span class="iso-math">Explainable Bounding Rules</span>
+                    </div>
+                    <div class="iso-face iso-side"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- The Math & Steps Accordions -->
+            <div class="methodology-accordions-wrap">
+              <h3 class="about-section-heading">Detailed Methodological Steps & Formulations</h3>
+
+              <!-- Accordion 1: The Percentage Problem & CLR -->
+              <details class="method-accordion" open>
+                <summary class="method-summary">
+                  <div class="summary-left">
+                    <span class="summary-badge">Stage 01</span>
+                    <span class="summary-title">The Percentage Problem & Centered Log-Ratio (CLR) Transformation</span>
+                  </div>
+                  <span class="material-symbols-outlined summary-chevron">expand_more</span>
+                </summary>
+                <div class="method-details-body">
+                  <p>
+                    National sector emission distributions are <strong>compositional data</strong>: each sovereign nation is represented as a strictly positive vector x = [x₁, x₂, ..., x_D] whose components represent the percentage shares of the five macro-sectors, constrained to sum to 100% (1.0). Geometrically, these data points do not reside in Euclidean space ℝ^D; they reside on the constrained <strong>Aitchison Simplex</strong>:
+                  </p>
+                  <div class="math-formula-box">
+                    S^{D-1} = { x = [x₁, x₂, ..., x_D]ᵀ ∈ ℝ^D | x_i > 0, ∑ x_i = 1 }
+                  </div>
+                  <p>
+                    As proven by Scottish statistician John Aitchison (1986), performing standard statistical operations (like calculating standard Euclidean distances or covariance matrices) directly on raw percentage shares leads to catastrophic artifacts:
+                  </p>
+                  <ul class="method-bullet-list">
+                    <li><strong>Spurious Negative Correlation:</strong> Because the components must sum to 100%, an increase in one sector mathematically forces other sectors to decrease, even if their underlying physical activities are completely independent.</li>
+                    <li><strong>Boundary Non-Linearity:</strong> The simplex is bounded between 0% and 100%. Moving from 1% to 2% represents a 100% relative expansion, whereas moving from 50% to 51% represents only a 2% change. Euclidean distance incorrectly treats both shifts as identical (+1%).</li>
+                  </ul>
+                  <p>
+                    To resolve this, we map the simplex into real Euclidean space using the <strong>Centered Log-Ratio (CLR) transformation</strong>. Prior to transformation, structural zero shares are handled via multiplicative zero-imputation with small perturbation parameter ε = 10⁻⁵:
+                  </p>
+                  <div class="math-formula-box highlight-math">
+                    clr(x_i) = ln( x_i / g(x) ) = ln(x_i) - (1 / D) ∑ ln(x_j) &nbsp;&nbsp;&nbsp; where g(x) = ( ∏ x_j )^(1/D)
+                  </div>
+                  <p>
+                    The CLR transformation functions as an isometric isomorphism, projecting the constrained compositional vector into an unconstrained hyper-plane in ℝ^D. In this transformed space, Euclidean distances between vectors correspond rigorously to the Aitchison distance on the simplex, enabling valid clustering without percentage distortion.
+                  </p>
+                </div>
+              </details>
+
+              <!-- Accordion 2: Unsupervised Grouping & Validation -->
+              <details class="method-accordion">
+                <summary class="method-summary">
+                  <div class="summary-left">
+                    <span class="summary-badge">Stage 02</span>
+                    <span class="summary-title">Unsupervised Algorithmic Benchmarking & Consensus Selection</span>
+                  </div>
+                  <span class="material-symbols-outlined summary-chevron">expand_more</span>
+                </summary>
+                <div class="method-details-body">
+                  <p>
+                    Rather than imposing arbitrary geopolitical boundaries, income tiers, or political treaties (like the Annex I / non-Annex I bifurcation of the 1997 Kyoto Protocol), we evaluated 4 distinct unsupervised learning paradigms on the CLR continuous manifold:
+                  </p>
+                  <div class="algo-eval-summary-grid">
+                    <div class="algo-summary-item">
+                      <strong>K-Means (Winner · Rank 1):</strong> Minimizes within-cluster inertia J = ∑ ∑ ||x - μ_k||². Achieved the highest Silhouette Score (0.714) and Calinski-Harabasz Index (141.61). Forms dense, hyper-spherical clusters perfectly matched to balanced economic archetypes.
+                    </div>
+                    <div class="algo-summary-item">
+                      <strong>Gaussian Mixture Models (GMM · Discarded):</strong> Soft probabilistic clustering using Expectation-Maximization (EM). Suffered from covariance matrix singularity errors when fitting countries with near-zero sector shares (e.g., micro-economies with minimal agriculture).
+                    </div>
+                    <div class="algo-summary-item">
+                      <strong>Hierarchical Agglomerative (Discarded):</strong> Bottom-up dendrogram synthesis using Ward's linkage. Produced elongated chaining artifacts that failed to cleanly delineate specialized transport corridors from baseload energy states.
+                    </div>
+                    <div class="algo-summary-item">
+                      <strong>DBSCAN (Discarded):</strong> Density-based spatial clustering (eps=0.8, min_samples=3). Catastrophically failed by collapsing 164 countries into a single undifferentiated mass and discarding 49 sovereign nations as unclassifiable "noise".
+                    </div>
+                  </div>
+                </div>
+              </details>
+
+              <!-- Accordion 3: Explainable AI (XAI) -->
+              <details class="method-accordion">
+                <summary class="method-summary">
+                  <div class="summary-left">
+                    <span class="summary-badge">Stage 03</span>
+                    <span class="summary-title">Explainable AI (XAI) Surrogate Bounding Rules & Policy Mapping</span>
+                  </div>
+                  <span class="material-symbols-outlined summary-chevron">expand_more</span>
+                </summary>
+                <div class="method-details-body">
+                  <p>
+                    While K-Means operating in 5-dimensional CLR space provides mathematical precision, high-dimensional centroids are inherently opaque to policymakers. To guarantee full transparency and explainability, we deployed surrogate Explainable AI (XAI) modeling:
+                  </p>
+                  <p>
+                    We trained shallow surrogate Decision Trees (maximum depth ≤ 3) using the discovered K-Means cluster labels as target classes and the original percentage sectoral distributions as input features. From the tree split points, we extracted deterministic, easily verifiable bounding-box rules:
+                  </p>
+                  <div class="xai-rules-grid">
+                    <div class="xai-rule-badge"><strong>⚡ Energy-Heavy:</strong> Energy ≥ 38.0% and Agriculture &lt; 20.0%</div>
+                    <div class="xai-rule-badge"><strong>🏭 Industry-Heavy:</strong> Industry ≥ 28.0%</div>
+                    <div class="xai-rule-badge"><strong>🚗 Transport-Heavy:</strong> Transport ≥ 25.0% and Energy &lt; 45.0%</div>
+                    <div class="xai-rule-badge"><strong>🌾 Agriculture-Heavy:</strong> Agriculture ≥ 30.0%</div>
+                    <div class="xai-rule-badge"><strong>🏢 Buildings-Heavy:</strong> Buildings ≥ 20.0% and Energy &lt; 40.0%</div>
+                  </div>
+                  <p style="margin-top: 12px;">
+                    Each rule acts as a deterministic decision gate, allowing any country's policy delegation to immediately understand why their nation was classified into a specific archetype and identify their dominant decarbonization priority.
+                  </p>
+                </div>
+              </details>
+            </div>
+          </div>
+
+          <!-- ============================================================
+               TAB 3: The 5 Archetypes & Policies
+               ============================================================ -->
+          <div class="about-tab-panel" id="tab-panel-archetypes" role="tabpanel">
+            <div class="archetypes-overview-card">
+              <h3 class="about-section-heading" style="margin-bottom: 6px;">The 5 Global Decarbonization Archetypes</h3>
+              <p class="about-card-desc">
+                Derived from unsupervised consensus clustering of 225 sovereign states. Each card details the structural bottleneck and preview policies from our curated decarbonization catalog.
+              </p>
+            </div>
+
+            <div class="archetypes-catalog-grid">
+              <!-- Archetype 1: Energy-Heavy -->
+              <div class="card archetype-catalog-card" style="border-top: 3px solid #f97316;">
+                <div class="arch-card-header">
+                  <div class="arch-icon-pill" style="color: #f97316; background: rgba(249, 115, 22, 0.15);">
+                    <span class="material-symbols-outlined">bolt</span>
+                  </div>
+                  <div>
+                    <h4 class="arch-catalog-name">Energy-Heavy</h4>
+                    <span class="arch-catalog-count">93 Nations · 41.3% of Global Total</span>
+                  </div>
+                </div>
+                <div class="arch-bottleneck-box">
+                  <strong>Structural Bottleneck:</strong>
+                  <p>Centralized thermal electricity generation and district heating relying on coal, gas, or heavy fuel oil grids.</p>
+                </div>
+                <details class="arch-roadmap-accordion">
+                  <summary class="arch-roadmap-summary">
+                    <span>Decarbonization Roadmap Preview</span>
+                    <span class="material-symbols-outlined arch-chev">expand_more</span>
+                  </summary>
+                  <ul class="arch-policy-list">
+                    <li><strong>Accelerated Coal Phase-Out:</strong> Decommission unmitigated thermal coal capacity, replacing baseload with nuclear, wind, and solar PV.</li>
+                    <li><strong>Grid Inertia & Battery Storage:</strong> Deploy utility-scale BESS and synchronous condensers to maintain grid frequency with high renewable penetration.</li>
+                    <li><strong>HVDC Transmission Corridors:</strong> Construct ultra-high-voltage direct-current lines connecting remote renewable generation to industrial load centers.</li>
+                  </ul>
+                </details>
+              </div>
+
+              <!-- Archetype 2: Industry-Heavy -->
+              <div class="card archetype-catalog-card" style="border-top: 3px solid #8b5cf6;">
+                <div class="arch-card-header">
+                  <div class="arch-icon-pill" style="color: #8b5cf6; background: rgba(139, 92, 246, 0.15);">
+                    <span class="material-symbols-outlined">factory</span>
+                  </div>
+                  <div>
+                    <h4 class="arch-catalog-name">Industry-Heavy</h4>
+                    <span class="arch-catalog-count">19 Nations · 8.4% of Global Total</span>
+                  </div>
+                </div>
+                <div class="arch-bottleneck-box">
+                  <strong>Structural Bottleneck:</strong>
+                  <p>High-temperature industrial process heat, chemical limestone calcination in cement, and carbon reduction in blast-furnace primary steelmaking.</p>
+                </div>
+                <details class="arch-roadmap-accordion">
+                  <summary class="arch-roadmap-summary">
+                    <span>Decarbonization Roadmap Preview</span>
+                    <span class="material-symbols-outlined arch-chev">expand_more</span>
+                  </summary>
+                  <ul class="arch-policy-list">
+                    <li><strong>Green Hydrogen Direct Reduction:</strong> Replace coking coal blast furnaces with hydrogen-based direct reduced iron (H₂-DRI) for zero-carbon steel.</li>
+                    <li><strong>Point-Source CCUS:</strong> Retrofit cement clinker kilns and chemical plants with post-combustion Carbon Capture, Utilization, and Storage.</li>
+                    <li><strong>Industrial Heat Pumps:</strong> Electrify low-to-medium temperature industrial steam generation via high-temperature industrial heat pumps.</li>
+                  </ul>
+                </details>
+              </div>
+
+              <!-- Archetype 3: Transport-Heavy -->
+              <div class="card archetype-catalog-card" style="border-top: 3px solid #06b6d4;">
+                <div class="arch-card-header">
+                  <div class="arch-icon-pill" style="color: #06b6d4; background: rgba(6, 182, 212, 0.15);">
+                    <span class="material-symbols-outlined">directions_car</span>
+                  </div>
+                  <div>
+                    <h4 class="arch-catalog-name">Transport-Heavy</h4>
+                    <span class="arch-catalog-count">44 Nations · 19.6% of Global Total</span>
+                  </div>
+                </div>
+                <div class="arch-bottleneck-box">
+                  <strong>Structural Bottleneck:</strong>
+                  <p>Petroleum combustion across long-distance freight, highway vehicle fleets, civil aviation, and maritime trade transit corridors.</p>
+                </div>
+                <details class="arch-roadmap-accordion">
+                  <summary class="arch-roadmap-summary">
+                    <span>Decarbonization Roadmap Preview</span>
+                    <span class="material-symbols-outlined arch-chev">expand_more</span>
+                  </summary>
+                  <ul class="arch-policy-list">
+                    <li><strong>Zero-Emission Fleet Mandates:</strong> Enforce 100% ZEV sales targets for passenger vehicles and light-duty commercial delivery vans by 2035.</li>
+                    <li><strong>Freight Rail Electrification:</strong> Shift intercity container haulage from diesel trucking corridors to overhead-catenary electrified rail networks.</li>
+                    <li><strong>Aviation & Maritime Clean Fuels:</strong> Implement binding mandates for Sustainable Aviation Fuel (SAF) and green ammonia/methanol bunkering.</li>
+                  </ul>
+                </details>
+              </div>
+
+              <!-- Archetype 4: Agriculture-Heavy -->
+              <div class="card archetype-catalog-card" style="border-top: 3px solid #10b981;">
+                <div class="arch-card-header">
+                  <div class="arch-icon-pill" style="color: #10b981; background: rgba(16, 185, 129, 0.15);">
+                    <span class="material-symbols-outlined">agriculture</span>
+                  </div>
+                  <div>
+                    <h4 class="arch-catalog-name">Agriculture-Heavy</h4>
+                    <span class="arch-catalog-count">66 Nations · 29.3% of Global Total</span>
+                  </div>
+                </div>
+                <div class="arch-bottleneck-box">
+                  <strong>Structural Bottleneck:</strong>
+                  <p>Biogenic enteric fermentation methane from livestock, agricultural nitrous oxide from synthetic nitrogen fertilizers, and pastureland deforestation.</p>
+                </div>
+                <details class="arch-roadmap-accordion">
+                  <summary class="arch-roadmap-summary">
+                    <span>Decarbonization Roadmap Preview</span>
+                    <span class="material-symbols-outlined arch-chev">expand_more</span>
+                  </summary>
+                  <ul class="arch-policy-list">
+                    <li><strong>Enteric Methane Inhibitors:</strong> Subsidize compound feed additives (3-NOP, bromoform-rich macroalgae) reducing ruminant digestive methane emissions.</li>
+                    <li><strong>Precision Nitrogen Application:</strong> Deploy variable-rate fertilizer injection, slow-release coated urea, and biological nitrification inhibitors.</li>
+                    <li><strong>Anti-Deforestation Moratoriums:</strong> Implement satellite-verified zero-deforestation supply chain covenants and REDD+ payments for ecosystem preservation.</li>
+                  </ul>
+                </details>
+              </div>
+
+              <!-- Archetype 5: Buildings-Heavy -->
+              <div class="card archetype-catalog-card" style="border-top: 3px solid #f59e0b;">
+                <div class="arch-card-header">
+                  <div class="arch-icon-pill" style="color: #f59e0b; background: rgba(245, 158, 11, 0.15);">
+                    <span class="material-symbols-outlined">apartment</span>
+                  </div>
+                  <div>
+                    <h4 class="arch-catalog-name">Buildings-Heavy</h4>
+                    <span class="arch-catalog-count">3 Nations · 1.3% of Global Total</span>
+                  </div>
+                </div>
+                <div class="arch-bottleneck-box">
+                  <strong>Structural Bottleneck:</strong>
+                  <p>Extreme sub-arctic space heating demands, legacy building envelope thermal leakage, and residential fossil fuel boiler combustion.</p>
+                </div>
+                <details class="arch-roadmap-accordion">
+                  <summary class="arch-roadmap-summary">
+                    <span>Decarbonization Roadmap Preview</span>
+                    <span class="material-symbols-outlined arch-chev">expand_more</span>
+                  </summary>
+                  <ul class="arch-policy-list">
+                    <li><strong>Deep Thermal Retrofits:</strong> Mandate triple-pane low-emissivity glazing, continuous exterior aerogel insulation, and airtightness standards.</li>
+                    <li><strong>Fossil Boiler Bans:</strong> Prohibit new heating oil and gas boiler installations, providing capital grants for cold-climate heat pump conversions.</li>
+                    <li><strong>4th Generation District Heating:</strong> Connect urban residential clusters to low-temperature geothermal networks and industrial waste heat recovery loops.</li>
+                  </ul>
+                </details>
+              </div>
+            </div>
+          </div>
+
+          <!-- ============================================================
+               TAB 4: Data & Scope
+               ============================================================ -->
+          <div class="about-tab-panel" id="tab-panel-data" role="tabpanel">
+            <!-- Hero Global Coverage Stat Card -->
+            <div class="card data-hero-stat-card">
+              <div class="stat-highlight-wrap">
+                <span class="stat-giant-num">225</span>
+                <div class="stat-meta-text">
+                  <span class="stat-tagline">Exhaustive Global Coverage</span>
+                  <h3 class="stat-headline">Sovereign Nations & Autonomous Territories</h3>
+                  <p class="stat-detail">
+                    Capturing 100% of officially documented global anthropogenic greenhouse gas emissions, spanning continental mega-emitters, industrialized G20 powers, landlocked agricultural states, and Small Island Developing States (SIDS).
+                  </p>
+                </div>
+              </div>
+
+              <div class="data-quick-stats-strip">
+                <div class="dstat-col">
+                  <span class="dstat-val">5 Macro Sectors</span>
+                  <span class="dstat-lbl">Simplex Dimensions</span>
+                </div>
+                <div class="dstat-col">
+                  <span class="dstat-val">54 Sub-Activities</span>
+                  <span class="dstat-lbl">IPCC AR5 Granularity</span>
+                </div>
+                <div class="dstat-col">
+                  <span class="dstat-val">1970 – 2023</span>
+                  <span class="dstat-lbl">Temporal Longitudinal Depth</span>
+                </div>
+                <div class="dstat-col">
+                  <span class="dstat-val">Mt CO₂e / yr</span>
+                  <span class="dstat-lbl">100-Year GWP Metric</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- The 5 Sector Dimensions -->
+            <div class="sectors-breakdown-section">
+              <h3 class="about-section-heading">Macro-Sector Dimensions (Simplex Composition)</h3>
+              <div class="sectors-grid-5">
+                <div class="sector-def-card">
+                  <span class="sec-dot" style="background: #f97316;"></span>
+                  <h4>1. Power & Heat (Energy)</h4>
+                  <p>Electricity generation, combined heat & power (CHP), petroleum refining, and energy sector self-consumption.</p>
+                </div>
+                <div class="sector-def-card">
+                  <span class="sec-dot" style="background: #8b5cf6;"></span>
+                  <h4>2. Heavy Industry & Manufacturing</h4>
+                  <p>Clinker calcination in cement, blast-furnace reduction in primary metallurgy, chemicals, and industrial fossil fuels.</p>
+                </div>
+                <div class="sector-def-card">
+                  <span class="sec-dot" style="background: #06b6d4;"></span>
+                  <h4>3. Domestic & International Transport</h4>
+                  <p>Road passenger & freight haulage, domestic rail transport, civil aviation, and inland/coastal maritime navigation.</p>
+                </div>
+                <div class="sector-def-card">
+                  <span class="sec-dot" style="background: #10b981;"></span>
+                  <h4>4. Agriculture & Land Use (AFOLU)</h4>
+                  <p>Enteric fermentation biogenic methane, synthetic nitrogen fertilizer application, manure management, and rice cultivation.</p>
+                </div>
+                <div class="sector-def-card">
+                  <span class="sec-dot" style="background: #f59e0b;"></span>
+                  <h4>5. Residential & Commercial Buildings</h4>
+                  <p>On-site fuel combustion for residential space heating, sanitary domestic hot water, cooking, and commercial HVAC.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Primary Data Provenance Cards -->
+            <div class="provenance-section-wrap">
+              <h3 class="about-section-heading">Primary Data Provenance & Authoritative Repositories</h3>
+              <div class="provenance-grid">
+                <div class="card prov-card">
+                  <div class="prov-header">
+                    <span class="prov-badge">Core Inventory</span>
+                    <h4 class="prov-name">EDGAR (v8.0)</h4>
+                  </div>
+                  <span class="prov-org">European Commission · Joint Research Centre (JRC)</span>
+                  <p class="prov-desc">
+                    The Emissions Database for Global Atmospheric Research. Provides globally harmonized, sector-specific greenhouse gas inventories compliant with IPCC guidelines, utilizing country-specific emission factors and activity rates.
+                  </p>
+                </div>
+
+                <div class="card prov-card">
+                  <div class="prov-header">
+                    <span class="prov-badge">Harmonization</span>
+                    <h4 class="prov-name">Our World in Data (OWID)</h4>
+                  </div>
+                  <span class="prov-org">Global Change Data Lab · Oxford University</span>
+                  <p class="prov-desc">
+                    Provides standardized time-series aggregating UN population statistics, gross domestic product (PPP-adjusted), and cross-verified historical sectoral breakdowns with verified attribution metadata.
+                  </p>
+                </div>
+
+                <div class="card prov-card">
+                  <div class="prov-header">
+                    <span class="prov-badge">UNFCCC Aggregation</span>
+                    <h4 class="prov-name">Climate Watch Data</h4>
+                  </div>
+                  <span class="prov-org">World Resources Institute (WRI)</span>
+                  <p class="prov-desc">
+                    Aggregates sovereign Nationally Determined Contributions (NDCs), national GHG inventory submissions, and long-term low-emission development strategies (LTS) for cross-verifying national decarbonization roadmaps.
+                  </p>
+                </div>
+
+                <div class="card prov-card">
+                  <div class="prov-header">
+                    <span class="prov-badge">Atmospheric Benchmark</span>
+                    <h4 class="prov-name">CEDS</h4>
+                  </div>
+                  <span class="prov-org">Pacific Northwest National Laboratory (PNNL)</span>
+                  <p class="prov-desc">
+                    The Community Emissions Data System produces multi-century gridded historical emission datasets for climate modeling and global carbon cycle simulations.
+                  </p>
+                </div>
+
+                <div class="card prov-card">
+                  <div class="prov-header">
+                    <span class="prov-badge">Regional Depth</span>
+                    <h4 class="prov-name">MEIC Inventory</h4>
+                  </div>
+                  <span class="prov-org">Tsinghua University · Department of Earth System Science</span>
+                  <p class="prov-desc">
+                    The Multi-resolution Emission Inventory for China provides high-resolution industrial and energy sector activity data, capturing high-growth manufacturing transitions in East Asian economies.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ============================================================
+               TAB 5: Literature & Research Foundation
+               ============================================================ -->
+          <div class="about-tab-panel" id="tab-panel-literature" role="tabpanel">
+            <!-- PRISMA Systematic Framework -->
+            <div class="card prisma-card">
+              <div class="prisma-header">
+                <span class="material-symbols-outlined prisma-icon">account_tree</span>
+                <div>
+                  <h3 class="card-title">PRISMA 2020 Systematic Literature Review</h3>
+                  <p class="card-desc">
+                    Methodological foundation constructed in accordance with the PRISMA (Preferred Reporting Items for Systematic Reviews and Meta-Analyses) statement.
+                  </p>
+                </div>
+              </div>
+
+              <div class="prisma-flow-grid">
+                <div class="prisma-step">
+                  <div class="prisma-step-num">01</div>
+                  <h4 class="prisma-step-title">Initial Identification</h4>
+                  <div class="prisma-step-badge">60 Records Identified</div>
+                  <p class="prisma-step-text">
+                    Comprehensive multi-database search across IEEE Xplore, ScienceDirect, Nature Climate Change, and arXiv targeting unsupervised learning in climate policy.
+                  </p>
+                </div>
+
+                <div class="prisma-step">
+                  <div class="prisma-step-num">02</div>
+                  <h4 class="prisma-step-title">Title & Abstract Screening</h4>
+                  <div class="prisma-step-badge">48 Records Screened</div>
+                  <p class="prisma-step-text">
+                    Duplicate removal and initial screening against relevance to sovereign emissions, macroeconomic sectors, and cluster validation indices.
+                  </p>
+                </div>
+
+                <div class="prisma-step">
+                  <div class="prisma-step-num">03</div>
+                  <h4 class="prisma-step-title">Full-Text Eligibility</h4>
+                  <div class="prisma-step-badge">31 Articles Assessed</div>
+                  <p class="prisma-step-text">
+                    In-depth evaluation for handling of compositional data constraints (simplex), distance metrics, and interpretability in policy formulation.
+                  </p>
+                </div>
+
+                <div class="prisma-step">
+                  <div class="prisma-step-num">04</div>
+                  <h4 class="prisma-step-title">Final Synthesis</h4>
+                  <div class="prisma-step-badge highlight-badge">22 Core Studies Included</div>
+                  <p class="prisma-step-text">
+                    Rigorous synthesis of 22 foundational peer-reviewed papers spanning Compositional Data Analysis (CoDa), cluster consensus, and Explainable AI.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Inclusion & Exclusion Criteria -->
+            <div class="criteria-dual-grid">
+              <div class="card criteria-card inclusion-card">
+                <div class="criteria-header">
+                  <span class="material-symbols-outlined" style="color: var(--accent-emerald);">check_circle</span>
+                  <h4 class="criteria-title">Inclusion Criteria</h4>
+                </div>
+                <ul class="criteria-list">
+                  <li><strong>Compositional Data Analysis (CoDa):</strong> Studies employing Aitchison log-ratio transformations (CLR, ILR, ALR) to maintain geometric integrity on bounded simplices.</li>
+                  <li><strong>Unsupervised Macroeconomic Clustering:</strong> Algorithmic partitioning of national-scale industrial or emissions portfolios without subjective human labels.</li>
+                  <li><strong>Internal Cluster Validation:</strong> Rigorous evaluation utilizing Silhouette Score, Davies-Bouldin, or Calinski-Harabasz metrics to prevent over-clustering.</li>
+                  <li><strong>Explainable AI (XAI):</strong> Deployment of surrogate trees, rule induction, or SHAP value attributions for transparent policymaking communication.</li>
+                </ul>
+              </div>
+
+              <div class="card criteria-card exclusion-card">
+                <div class="criteria-header">
+                  <span class="material-symbols-outlined" style="color: #f43f5e;">cancel</span>
+                  <h4 class="criteria-title">Exclusion Criteria</h4>
+                </div>
+                <ul class="criteria-list">
+                  <li><strong>Pure Univariate Time-Series Forecasting:</strong> Standalone ARIMA, SARIMAX, or Prophet models focused solely on extrapolating historical trajectories without structural sector topology.</li>
+                  <li><strong>Opaque Deep Neural Architectures:</strong> Uninterpretable black-box deep networks (e.g. multi-layer LSTMs) lacking transparent mathematical decision boundaries for policymakers.</li>
+                  <li><strong>Micro-Scale Local Inventories:</strong> Municipal, facility-level, or corporate carbon accounting papers lacking sovereign macroeconomic transferability.</li>
+                  <li><strong>Non-Compositional Euclidean Distance:</strong> Studies applying raw Euclidean distance directly to raw sector percentages, violating Aitchison simplex geometry.</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Academic Disclaimer Callout Box -->
+            <div class="academic-disclaimer-box">
+              <div class="disclaimer-header">
+                <span class="material-symbols-outlined disclaimer-icon">gavel</span>
+                <span class="disclaimer-tag">Academic Disclaimer & Scope of Equivalence</span>
+              </div>
+              <p class="disclaimer-text">
+                Note: The cross-archetype equivalence measure developed in this study is illustrative of relative structural scale. It does not make causal or predictive claims about policy outcomes.
+              </p>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+  </div>
+
+  <!-- Floating Mascot -->
+  <div id="mascot-container" class="mascot-container" style="pointer-events: none;">
+    <div id="mascot-bubble" class="mascot-bubble hidden" style="display: none;">
+      <h4>👋 Welcome to the Simulator!</h4>
+      <p>I am your AI Policy Assistant. This model discovers global carbon emission archetypes through unsupervised machine learning. Instead of just looking at total emissions, I use sector-wise compositional data to group countries by their structural bottlenecks. Then, I use Explainable AI to translate complex math into actionable climate policy recommendations!</p>
+    </div>
+    <div id="mascot-icon" class="mascot-icon">
+      <!-- CSS 3D Animated Icon (A stylized eco/CO2 sphere) -->
+      <div class="sphere">🌱</div>
+    </div>
+  </div>
+
+  <!-- Main JavaScript Engine -->
+  <script src="script.js?v=20261030_v4"></script>
+</body>
+</html>

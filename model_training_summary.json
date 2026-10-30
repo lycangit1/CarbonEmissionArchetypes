@@ -1,0 +1,14 @@
+{
+    "winner_algorithm": "DBSCAN",
+    "winner_config": "eps=1.5, min_samples=4 (clusters=3, noise=17)",
+    "silhouette_score": 0.6389934949066333,
+    "davies_bouldin_index": 2.28399245105763,
+    "calinski_harabasz_index": 62.44320396443426,
+    "total_countries": 225,
+    "cluster_counts": {
+        "0": 196,
+        "-1": 17,
+        "1": 7,
+        "2": 5
+    }
+}
